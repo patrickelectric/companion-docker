@@ -1,0 +1,88 @@
+{
+  "latest": {
+    "dockers": {
+      "supervisor": {
+        "tag": "1.0.0-alpha.2",
+        "image": "williangalvani/supervisor",
+        "enabled": true,
+        "webui": false,
+        "ports": {
+          "8080/tcp": 8080
+        },
+        "binds": {
+          "/var/run/docker.sock": {
+            "bind": "/var/run/docker.sock",
+            "mode": "rw"
+          },
+          "{PWD}/config": {
+            "bind": "/supervisor/.config",
+            "mode": "rw"
+          }
+        }
+      },
+      "companion-core": {
+        "tag": "1.0.0-alpha.2",
+        "image": "williangalvani/companion-core",
+        "enabled": true,
+        "webui": false,
+        "ports": {
+          "9000/tcp": 9000
+        },
+        "binds": {
+          "/var/run/wpa_supplicant/wlan0": {
+            "bind": "/var/run/wpa_supplicant/wlan0",
+            "mode": "rw"
+          },
+          "/tmp/wpa_playground": {
+            "bind": "/tmp/wpa_playground",
+            "mode": "rw"
+          }
+        },
+        "privileged": true
+      }
+    }
+  },
+  "alpha1": {
+    "dockers": {
+      "supervisor": {
+        "tag": "1.0.0-alpha.1",
+        "image": "williangalvani/supervisor",
+        "enabled": true,
+        "webui": false,
+        "ports": {
+          "8080/tcp": 8080
+        },
+        "binds": {
+          "/var/run/docker.sock": {
+            "bind": "/var/run/docker.sock",
+            "mode": "rw"
+          },
+          "{PWD}/config": {
+            "bind": "/supervisor/.config",
+            "mode": "rw"
+          }
+        }
+      },
+      "companion-core": {
+        "tag": "1.0.0-alpha.1",
+        "image": "williangalvani/companion-core",
+        "enabled": true,
+        "webui": false,
+        "ports": {
+          "9000/tcp": 9000
+        },
+        "binds": {
+          "/var/run/wpa_supplicant/wlan0": {
+            "bind": "/var/run/wpa_supplicant/wlan0",
+            "mode": "rw"
+          },
+          "/tmp/wpa_playground": {
+            "bind": "/tmp/wpa_playground",
+            "mode": "rw"
+          }
+        },
+        "privileged": true
+      }
+    }
+  }
+}

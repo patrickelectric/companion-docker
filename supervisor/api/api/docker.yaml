@@ -1,0 +1,153 @@
+paths:
+  /dockers/active:
+    get:
+      tags:
+        - docker
+      summary: Read Companion system status
+      description: Read CPU, Disk and RAM status of the companion computer
+      operationId: readStatus
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/status"
+        500:
+          description: Error reading system data
+  /dockers/{dockerId}:
+    get:
+      tags:
+        - docker
+      summary: 
+      description: Provides a status list of running services
+      operationId: readServices
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/service"
+        500:
+          description: Error reading system services
+  /system/devices:
+    get:
+      tags:
+        - docker
+      summary: Read Companion system detected devices
+      description: Provides a list of devices that are connected and detected by the operating system
+      operationId: readDevices
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/devicelist"
+
+        500:
+          description: Error reading system services
+  /system/version:
+    get:
+      tags:
+        - docker
+      summary: Read Companion system version
+      description: Read version of companion or git hash if current commit is not tagged
+      operationId: readVersion
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/version"
+        500:
+          description: Error reading system version
+
+components:
+  schemas:
+    status:
+      type: "object"
+      properties:
+        cpuload:
+          type: "number"
+          example: 5.2
+          description: "Cpu load in % of all cores"
+        uptime:
+          type: "string"
+          example: "5 days, 20 hours, 41 minutes"
+        ram:
+          type: "string"
+          example: "596MB/926MB (64% used)"
+        disk:
+          type: "string"
+          example: "2.5GB/14.4GB (19% used)"
+        cpustatus:
+          type: array
+          items:
+            type: object
+            properties:
+              event:
+                type: string
+                example: "over-voltage"
+                description: "Event type."
+              time:
+                type: "string"
+                example: "2001-07-08T00:34:60.026490+09:30"
+                description: "ISO 8601 / RFC 3339 date & time format."
+
+    service:
+      type: object
+      properties:
+        event:
+          type: string
+          example: "ping-proxy"
+          description: "Running service."
+        timestamp:
+          type: integer
+          example: 100
+          description: "Time that the service is running in seconds."
+        cpu:
+          type: number
+          example: 2.5
+          description: "CPU percentage allocated for this service."
+        ram:
+          type: number
+          example: 0.9
+          description: "RAM percentage allocated for this service."
+
+    devicelist:
+      type: "object"
+      properties:
+        name:
+          type: string
+          description: "Human friendly name."
+        capabilities:
+          type: array
+          description: "Device's capability list."
+          items:
+            type: string
+            description: "Device capability."
+      example:
+        { "name": "Raspberry Camera", "capabilities": ["audio", "video"]}
+
+    version:
+      type: object
+      properties:
+        tag:
+          type: string
+          description: "Base companion release."
+          example: 0.0.19
+        commits:
+          type: number
+          description: "Number of commits over the tag, typically zero."
+          example: 0
+        hash:
+          type: string
+          description: "Hash code of the last commit."
+          example: "g9aa6f65"
