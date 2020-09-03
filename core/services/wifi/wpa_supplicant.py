@@ -26,7 +26,7 @@ class WPASupplicant:
         """
         self.target = target
 
-        if type(self.target) == tuple:
+        if isinstance(self.target, tuple):
             self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         else:
             self.sock = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
@@ -488,7 +488,8 @@ class WPASupplicant:
     def send_command_ctrl_req_(self) -> Tuple[bytes, bool]:
         """Send message: CTRL-REQ-
 
-        WPA_CTRL_REQ: Request information from a user. See  <a class="el" href="ctrl_iface_page.html#ctrl_iface_interactive">Interactive
+        WPA_CTRL_REQ: Request information from a user.
+        See  <a class="el" href="ctrl_iface_page.html#ctrl_iface_interactive">Interactive
             requests</a>  sections for more details.
         """
         return self.send_command("CTRL-REQ-")
