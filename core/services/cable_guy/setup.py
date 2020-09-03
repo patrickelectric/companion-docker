@@ -1,9 +1,10 @@
 import pathlib
-import setuptools
-import ssl
 import shutil
+import ssl
 import sys
 import urllib.request
+
+import setuptools
 
 
 def populate_static_files() -> None:

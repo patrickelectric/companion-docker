@@ -1,9 +1,9 @@
-import appdirs
-import os
 import json
+import os
 import pprint
-
 from typing import Any, Dict, List
+
+import appdirs
 
 
 class Settings:

@@ -2,16 +2,13 @@
 import logging
 import os
 import sys
-
 from pathlib import Path
+from typing import Any
 
 import connexion
 import flask
 from connexion.resolver import RestyResolver
-
 from waitress import serve
-
-from typing import Any
 
 logging.basicConfig(level=logging.INFO)
 
