@@ -1,4 +1,5 @@
 import enum
+import gzip
 import json
 import pathlib
 import random
@@ -90,8 +91,6 @@ class FirmwareDownload:
         Returns:
             bool: True if file was downloaded and validated, False if not.
         """
-        import gzip
-
         with urlopen(FirmwareDownload._manifest_remote) as http_response:
             manifest_gzip = http_response.read()
             manifest = gzip.decompress(manifest_gzip)
