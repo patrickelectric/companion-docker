@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import logging
 import os
+import sys
 
 from pathlib import Path
 
@@ -18,8 +19,8 @@ HTML_FOLDER = Path.joinpath(Path(__file__).parent.absolute(), "html")
 
 
 def index() -> str:
-    index = Path.joinpath(HTML_FOLDER, "index.html")
-    return open(index, "r").read()
+    index_file_path = Path.joinpath(HTML_FOLDER, "index.html")
+    return open(index_file_path, "r").read()
 
 
 def resource(path: str, filename: str) -> Any:
@@ -41,7 +42,7 @@ if __name__ == "__main__":
         print(
             "You need to have root privileges to run this script.\nPlease try again, this time using **sudo**. Exiting."
         )
-        exit(1)
+        sys.exit(1)
 
     connexion_app = connexion.FlaskApp(__name__)
     connexion_app.app.after_request(set_cors_headers_on_response)

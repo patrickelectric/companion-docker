@@ -1,6 +1,7 @@
 import appdirs
 import os
 import json
+import pprint
 
 from typing import Any, Dict, List
 
@@ -42,8 +43,6 @@ class Settings:
                 self.root = data
         except Exception as exception:
             print(f"Failed to fetch data from file ({self.settings_file}): {exception}")
-            import pprint
-
             pprint.pprint(data)
 
         return True
