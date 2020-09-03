@@ -2,12 +2,12 @@ import glob
 import os
 import socket
 import time
-from typing import Optional, Tuple
+from typing import Optional, Tuple, Union
 
 
 class WPASupplicant:
     BUFFER_SIZE = 4096
-    target = ("localhost", 6664)
+    target: Union[Tuple[str, int], str] = ("localhost", 6664)
     verbose = True
 
     def __init__(self) -> None:
@@ -17,7 +17,7 @@ class WPASupplicant:
         if self.sock:
             self.sock.close()
 
-    def run(self, target: Tuple[str, int] = target) -> None:
+    def run(self, target: Union[Tuple[str, int], str] = target) -> None:
         """Does the connection and setup variables
 
         Arguments:
