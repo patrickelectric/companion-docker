@@ -48,6 +48,13 @@ echo "Going to install companion-docker version ${VERSION}."
 echo "Downloading and installing udev rules."
 curl -fsSL $REMOTE/install/udev/100.autopilot.rules -o /etc/udev/rules.d/100.autopilot.rules
 
+#echo "Check necessary amount of memory."
+#curl -fsSL $REMOTE/install/configure_swap.sh | bash
+#RAM_MEMORY_TOTAL_MB=$(free -mt | grep Total | grep -oE [0-9]+ | head -n1)
+#DISK_MEMORY_AVAILABLE_Mb=$(df -B1MB --output=avail,target | grep /$ | grep -oE [0-9]+)
+#if (( $RAM_MEMORY_TOTAL_MB < 1024 ));then
+#fi
+
 echo "Downloading bootstrap"
 COMPANION_BOOTSTRAP="bluerobotics/companion-bootstrap:master" # We don't have others tags for now
 docker pull $COMPANION_BOOTSTRAP
