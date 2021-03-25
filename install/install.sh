@@ -5,6 +5,9 @@ VERSION="${VERSION:-master}"
 REMOTE="${REMOTE:-https://raw.githubusercontent.com/bluerobotics/companion-docker}"
 REMOTE="$REMOTE/$VERSION"
 
+echo "Going to install version: $VERSION"
+echo "From: $REMOTE"
+
 # Exit immediately if a command exits with a non-zero status
 set -e
 
