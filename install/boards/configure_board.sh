@@ -7,6 +7,9 @@ REMOTE="${REMOTE:-https://raw.githubusercontent.com/bluerobotics/companion-docke
 REMOTE="$REMOTE/$VERSION"
 CONFIGURE_BOARD_PATH="$REMOTE/install/boards"
 
+echo "POTATO"
+exit 255
+
 function board_not_detected {
     echo "Hardware not identified in $1, please repport back the following line:"
     echo "---"
