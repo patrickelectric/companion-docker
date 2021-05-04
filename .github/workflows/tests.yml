@@ -20,11 +20,14 @@ jobs:
         python-version: ${{ matrix.python-version }}
     -
       name: Install dependencies
+      env: |
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       run: |
         sudo apt install shellcheck
         npm install eslint eslint-plugin-vue eslint-plugin-html --save-dev
         # Turn npm binaries available
-        export PATH=$PATH:$PWD/node_modules/.bin/
+        echo "::add-path::$PWD/node_modules/.bin/"
+        ls node_modules/.bin
         python -m pip install --upgrade pip
         pip install wheel # wheel need to be installed before mavproxy
         pip install mavproxy
