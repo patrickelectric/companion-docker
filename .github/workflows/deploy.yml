@@ -122,7 +122,7 @@ jobs:
           submodules: recursive
       - uses: pguyot/arm-runner-action@v1
         with:
-          image_additional_mb: 2048
+          image_additional_mb: 6144
           commands: |
             ./install/install.sh
       - name: Compress image
