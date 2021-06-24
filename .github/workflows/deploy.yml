@@ -112,3 +112,23 @@ jobs:
         run: |
           docker buildx imagetools \
             inspect ${{ steps.prepare.outputs.docker_image }}:${{ steps.prepare.outputs.version }}
+
+  image-arm-v7:
+    name: ARM v7 image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - uses: pguyot/arm-runner-action@v1
+        with:
+          image_additional_mb: 2048
+          commands: |
+            ./install/install.sh
+      - name: Compress image
+        run: |
+          mv ${{ steps.build_image.outputs.image }} companion.img
+          xz -0 -T 0 -v companion.img
+      - uses: actions/upload-artifact@master
+        with:
+          path: companion.img
